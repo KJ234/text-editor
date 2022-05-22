@@ -17,16 +17,18 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: "./index.html",
-        title: "Text Editor",
       }),
       new InjectManifest({
-        swSrc: "/src-sw.js",
+        swSrc: "./src-sw.js",
         swDest: "src-sw.js",
       }),
+
       new WebpackPwaManifest({
-        name: "Text Editor",
-        short_name: "Text Editor",
+        name: "jate",
+        short_name: "jate",
         description: "create notes",
+        start_url: "/",
+        publicPath: "/",
         icons: [
           {
             src: path.resolve("src/images/logo.png"),
@@ -34,10 +36,6 @@ module.exports = () => {
             destination: path.join("assets", "icons"),
           },
         ],
-        start_url: "/",
-        theme_color: "#31a9e2",
-        background_color: "#272822",
-        fingerprints: false,
       }),
     ],
 
@@ -47,10 +45,9 @@ module.exports = () => {
           test: /\.css$/i,
           use: ["style-loader", "css-loader"],
         },
-
         {
           test: /\.m?js$/,
-          exclude: /(node_modules/,
+          exclude: /node_modules/,
           use: {
             loader: "babel-loader",
             options: {
